@@ -3,12 +3,18 @@ title: "Topographic Data in R"
 author: "Eric Pante, Benoit Simon-Bouhet and Jean-Olivier Irisson"
 output: html_document
 params:
-  dataset: "florida"
+  dataset: "hawaii"
 ---
 
-marmap is a package designed for downloading, plotting and manipulating bathymetric and topographic data in R.
+**marmap** is a package designed for
 
-```{r setup}
+- downloading
+- plotting
+- and manipulating 
+
+bathymetric and topographic data in R.
+
+```{r setup, include = FALSE}
 library(marmap, warn = FALSE)
 library(ggplot2, warn = FALSE)
 library(viridis, warn = FALSE)
