@@ -1,0 +1,50 @@
+---
+title: "Topographic Data in R"
+author: "Eric Pante, Benoit Simon-Bouhet and Jean-Olivier Irisson"
+output: html_document
+params:
+  dataset: "florida"
+---
+
+marmap is a package designed for downloading, plotting and manipulating bathymetric and topographic data in R.
+
+```{r setup}
+library(marmap, warn = FALSE)
+library(ggplot2, warn = FALSE)
+library(viridis, warn = FALSE)
+
+data(list = params$data)
+df <- fortify(get(params$data))
+
+p <- ggplot(df, aes(x=x, y=y)) +
+  geom_raster(aes(fill=z)) +
+  geom_contour(aes(z=z), colour="white", size=0.1,
+    breaks=c(-100, -200, -500, -1000, -2000, -4000)) + 
+  geom_contour(aes(z=z), colour="white", size=0.3, breaks=0) + 
+  theme_void() + 
+  coord_fixed()
+```
+
+## Using Topographic Colors
+
+```{r}
+p + scale_fill_etopo()
+```
+
+## Using Viridis Colors
+
+```{r}
+p + scale_fill_viridis()
+```
+
+## Using Viridis Magma Colors
+
+```{r}
+p + scale_fill_viridis(option = "A")
+```
+
+## Using Terrain Colors
+
+```{r}
+p + scale_fill_gradientn(colors = terrain.colors(100))
+```
